@@ -5,51 +5,54 @@ import java.util.Arrays;
 public class mergeSort {
 
     public int[] mergeSort(int[] nums, int left, int right){
-
-        System.out.print(left);
-        System.out.print(" ");
-        System.out.print(right);
-        System.out.print(" then -> ");
         if(left<right){
             int mid = (left+right)/2;
             mergeSort(nums, left, mid);
-            mergeSort(nums, mid+1, right);
-            System.out.println(" ");
-            nums = merge(nums, left, mid, right);
+            mergeSort(nums, mid + 1, right);
+            mergedArray(nums, left, mid, right);
         }
         return nums;
     }
-    
-    public int[] merge(int[] nums, int left, int mid, int right){
-        int[] sorted = new int[nums.length];
-        int idx = left;
-        int i = left;
-        int j = mid + 1;
-        while(i< mid + 1 && j <= right){
-        if(nums[i]<nums[j]){
-            sorted[idx] = nums[i];
-            i++; 
-        } else {
-            sorted[idx] = nums[j];
-            j++;
+
+    private int[] mergedArray(int[] nums, int left, int mid, int right){
+        int size1 = mid-left+1;
+        int size2 = right-mid;
+        int[] sortedArray1 = new int[size1];
+        int[] sortedArray2 = new int[size2];
+
+        for(int x = 0; x < size1; x++){
+            sortedArray1[x] = nums[left+x];
         }
-        idx++;}
-        if(i>mid){
-            while(j <= right){
-                sorted[idx] = nums[j];
-                j++; idx++;
-            }
-        } else {
-            while(i < mid + 1){
-                sorted[idx] = nums[i];
-                i++; idx++;
-            }
+
+        for(int x = 0; x < size2; x++){
+            sortedArray2[x] = nums[mid+1+x];
         }
-        while(idx<nums.length){
-            sorted[idx] = nums[idx];
-            idx++;
+
+        int i =0;
+        int j =0;
+        int k =left;
+
+        while(i<size1 && j<size2){
+        if(sortedArray1[i]<=sortedArray2[j]){
+            nums[k] = sortedArray1[i];
+            i++;
+        } else{
+            nums[k] = sortedArray2[j];
+            j++;   
         }
-        System.out.println(Arrays.toString(sorted));
-        return sorted;
+        k++;}
+
+        while(i<size1){
+            nums[k] = sortedArray1[i];
+            i++; k++;
+        }
+
+        while(j<size2){
+            nums[k] = sortedArray2[j];
+            j++; k++;
+        }
+
+        return nums;
+
     }
 }
