@@ -4,20 +4,21 @@ public class InsertionsSort {
 
     public int[] insertionSort(int[] nums){
 
-        for(int i = 0; i < nums.length; i++){
-            if(nums[i]>nums[i+1]){
-                int key = nums[i+1];
-                nums[i+1] = nums[i];
-                nums[i] = key;
-                for(int j =i; j>0; j--){
-                    if(nums[j-1]<nums[i+1]){
-                        int temp = nums[j];
-                        nums[j] = nums[i+1];
-                        nums[i+1] = temp;
-                    }
-                }
+        System.out.println("new");
+
+        for(int i = 0; i < nums.length-1; i++){
+            int key = nums[i+1];
+                int j = i;
+                while( j >=0 && nums[j]>key){
+                nums[j + 1] = nums[j]; 
+                j--;
+                // System.out.println(" ");
+                System.out.println(Arrays.toString(nums));
+
             }
-        System.out.println(Arrays.toString(nums));
+            nums[j+1] = key;
+                System.out.println(Arrays.toString(nums));
+            
         }
         return nums;
     }
