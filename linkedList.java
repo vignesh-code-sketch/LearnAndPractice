@@ -26,6 +26,10 @@ class Node {
 class LinkedList {
     Node head;
 
+    public Node getHead(){
+        return this.head;
+    }
+
     // Method to insert a new node at the end of the linked list
     public void insert(int data) {
         Node newNode = new Node(data);
